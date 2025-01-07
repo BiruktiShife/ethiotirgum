@@ -17,10 +17,10 @@ const translations = [
     tigrigna: "ከመይ ኢኻ?",
     gamootho: "Aymelle?",
     audio: {
-      amharic: "/audio/amharic/endat-neh.m4a",
-      oromo: "/audio/oromo/akkam.m4a",
-      tigrigna: "/audio/tigrigna/kemey-ika.m4a",
-      gamootho: "/audio/gamootho/aymelle.m4a",
+      amharic: "/audio/amharic/Endet-neh.m4a",
+      oromo: "/audio/oromo/Akkam.m4a",
+      tigrigna: "/audio/tigrigna/kemey.m4a",
+      gamootho: "/audio/gamootho/Aymelle.m4a",
     },
   },
   {
@@ -29,10 +29,10 @@ const translations = [
     tigrigna: "የቐንየለይ",
     gamootho: "Galatays",
     audio: {
-      amharic: "/audio/amharic/amesegenallo.mp3",
-      oromo: "/audio/oromo/galatoomi.mp3",
-      tigrigna: "/audio/tigrigna/yeqenyeley.mp3",
-      gamootho: "/audio/gamootho/galatays.mp3",
+      amharic: "/audio/amharic/Amesegnalew.m4a",
+      oromo: "/audio/oromo/Galatoomi.m4a",
+      tigrigna: "/audio/tigrigna/Yekonyeley.m4a",
+      gamootho: "/audio/gamootho/Galatays.m4a",
     },
   },
   {
@@ -41,10 +41,10 @@ const translations = [
     tigrigna: "እወ",
     gamootho: "Eya",
     audio: {
-      amharic: "/audio/amharic/awo.mp3",
-      oromo: "/audio/oromo/eeyyee.mp3",
-      tigrigna: "/audio/tigrigna/ewa.mp3",
-      gamootho: "/audio/gamootho/eya.mp3",
+      amharic: "/audio/amharic/Awo.m4a",
+      oromo: "/audio/oromo/Eeyyee.m4a",
+      tigrigna: "/audio/tigrigna/Ewe.m4a",
+      gamootho: "/audio/gamootho/Eeyee.m4a",
     },
   },
   {
@@ -53,10 +53,10 @@ const translations = [
     tigrigna: "ሓላው",
     gamootho: "Ero",
     audio: {
-      amharic: "/audio/amharic/ishi.mp3",
-      oromo: "/audio/oromo/tole.mp3",
-      tigrigna: "/audio/tigrigna/halao.mp3",
-      gamootho: "/audio/gamootho/ero.mp3",
+      amharic: "/audio/amharic/Ishi.m4a",
+      oromo: "/audio/oromo/Tole.m4a",
+      tigrigna: "/audio/tigrigna/Halao.m4a",
+      gamootho: "/audio/gamootho/Ero.m4a",
     },
   },
   {
