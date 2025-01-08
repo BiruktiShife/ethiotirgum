@@ -1,6 +1,6 @@
 "use client";
 import "regenerator-runtime/runtime";
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { IconCopy, IconVolume } from "@tabler/icons-react";
 import SpeechRecognitionComponent from "@/components/SpeechRecognition/SpeechRecognition";
 import TextArea from "@/components/Inputs/TextArea";
@@ -24,9 +24,9 @@ interface Translation {
 const Home: React.FC = () => {
   const [translations, setTranslations] = useState<Translation[]>([]);
   const [copied, setCopied] = useState<boolean>(false);
-  const [input, setInput] = useState<string>("");
-  const [output, setOutput] = useState<string>("");
-  const [language, setLanguage] = useState<Language>("oromo");
+  const [input, setInput] = useState<string>(""); // Source word
+  const [output, setOutput] = useState<string>(""); // Translated word
+  const [language, setLanguage] = useState<Language>("oromo"); // Target language
 
   useEffect(() => {
     const fetchTranslations = async () => {
@@ -57,12 +57,35 @@ const Home: React.FC = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleAudioPlayback = (language: Language) => {
-    const translation = translations.find((t) => t[language]);
+  const handleAudioPlayback = (
+    language: Language,
+    isSource: boolean = false
+  ) => {
+    const translation = isSource
+      ? translations.find((t) => t.amharic === input) // Match source input
+      : translations.find((t) => t[language] === output); // Match output
+
     if (translation) {
-      const audioPath = translation.audio[language];
-      const audio = new Audio(audioPath);
-      audio.play();
+      const audioPath = isSource
+        ? translation.audio.amharic
+        : translation.audio[language];
+      console.log(
+        "Playing audio for:",
+        isSource ? input : output,
+        "in language:",
+        isSource ? "amharic" : language,
+        "Audio Path:",
+        audioPath
+      );
+
+      if (audioPath) {
+        const audio = new Audio(audioPath);
+        audio.play();
+      } else {
+        console.error("Audio file not available for this translation.");
+      }
+    } else {
+      console.error("Translation not found for:", isSource ? input : output);
     }
   };
 
@@ -81,13 +104,14 @@ const Home: React.FC = () => {
             </p>
             <div className="mt-7 sm:mt-12 mx-auto max-w-3xl relative">
               <div className="grid gap-4 md:grid-cols-2 grid-cols-1">
+                {/* Source Language Section */}
                 <div className="relative z-10 flex flex-col space-x-3 p-3 border rounded-lg shadow-lg bg-neutral-900 border-neutral-700 shadow-gray-900/20">
                   <TextArea
                     id="source-language"
                     value={input}
-                    onChange={(e: {
-                      target: { value: React.SetStateAction<string> };
-                    }) => setInput(e.target.value)}
+                    onChange={(e: { target: { value: string } }) =>
+                      setInput(e.target.value)
+                    }
                     placeholder="የአማርኛ ቃል ያስገቡ"
                   />
                   <div className="flex flex-row justify-between w-full">
@@ -95,7 +119,9 @@ const Home: React.FC = () => {
                       <SpeechRecognitionComponent setSourceText={setInput} />
                       <IconVolume
                         size={22}
-                        onClick={() => handleAudioPlayback("amharic")}
+                        onClick={() => {
+                          handleAudioPlayback("amharic", true); // Play source Amharic word
+                        }}
                       />
                       <button
                         onClick={translate}
@@ -108,6 +134,7 @@ const Home: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Target Language Section */}
                 <div className="relative z-10 flex flex-col space-x-3 p-3 border rounded-lg shadow-lg bg-neutral-900 border-neutral-700 shadow-gray-900/20">
                   <TextArea
                     id="target-language"
@@ -133,7 +160,9 @@ const Home: React.FC = () => {
                       </span>
                       <IconVolume
                         size={22}
-                        onClick={() => handleAudioPlayback(language)}
+                        onClick={() => {
+                          handleAudioPlayback(language); // Play translated word
+                        }}
                       />
                     </span>
                     <div className="flex flex-row items-center space-x-2 pr-4 cursor-pointer">
